@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+ * Design tokens
+ * Values measured from the Figma exports (1280px desktop, 402px mobile).
+ * Spacing and radius use Tailwind's default scale: every value in the design
+ * (4px grid, radii 6/8/12/16/24) already maps to a default utility.
+ * ------------------------------------------------------------------------- */
+@theme {
+  /* Reset the default palette so only design tokens are available */
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-navy: #171b2c; /* text-primary, footer background */
+  --color-blue: #3157f6;
+  --color-yellow: #ffee7e;
+  --color-yellow-soft: #fff1c2;
+  --color-cream: #f9f8f3;
+  --color-peach: #ffcb9f;
+  --color-lilac: #e2e8ff;
+  --color-gold: #e9d659;
+  --color-coral: #ff704d;
+  --color-muted: #656770; /* text-secondary */
+  --color-subtle: #6d7384;
+  --color-faint: #9e9faa;
+  --color-line: #dbdfeb;
+  --color-line-soft: #e7e7ec;
+
+  --container-page: 80rem; /* 1280px */
+  --spacing-header: 4.375rem; /* 70px, header height and anchor offset */
+
+  /* TODO(figma): provisional shadows, replace with the exact Figma effects */
+  --shadow-badge: 0 8px 24px -6px rgb(23 27 44 / 0.12);
+  --shadow-card: 0 16px 40px -12px rgb(23 27 44 / 0.12);
+}
+
+/* inline: resolve the next/font CSS variables where the utility is used */
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ---------------------------------------------------------------------------
+ * Text styles: one utility per Figma text style.
+ * Mobile values first, desktop values from the lg breakpoint (1024px).
+ * ------------------------------------------------------------------------- */
+@utility type-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2.5rem; /* 40 */
+  line-height: 2.75rem; /* 44 */
+  letter-spacing: -0.0625rem; /* TODO(figma): mobile tracking, -1px estimated from desktop -1.6px */
+  @variant lg {
+    font-size: 4rem; /* 64 */
+    line-height: 4.375rem; /* 70 */
+    letter-spacing: -0.1rem; /* -1.6px */
+  }
+}
+
+@utility type-h2 {
+  font-family: var(--font-display);
+  font-weight: 800; /* TODO(figma): confirm H2 weight */
+  font-size: 2.25rem; /* 36 */
+  line-height: 2.5rem; /* 40 */
+  letter-spacing: -0.0625rem; /* TODO(figma): confirm H2 tracking */
+  @variant lg {
+    font-size: 3.5rem; /* 56 */
+    line-height: 4rem; /* 64 */
+    letter-spacing: -0.1rem;
+  }
+}
+
+@utility type-h3 {
+  font-family: var(--font-display);
+  font-weight: 800; /* TODO(figma): confirm H3 weight */
+  font-size: 2rem; /* 32 */
+  line-height: 2.25rem; /* 36 */
+  letter-spacing: -0.05rem; /* TODO(figma): confirm H3 tracking */
+  @variant lg {
+    font-size: 3rem; /* 48 */
+    line-height: 3.5rem; /* 56 */
+    letter-spacing: -0.075rem;
+  }
+}
+
+@utility type-h4 {
+  font-family: var(--font-display);
+  font-weight: 800; /* TODO(figma): confirm H4 weight */
+  font-size: 1.75rem; /* 28 */
+  line-height: 2rem; /* 32 */
+  letter-spacing: -0.05rem; /* TODO(figma): confirm H4 tracking */
+  @variant lg {
+    font-size: 2.5rem; /* 40 */
+    line-height: 3rem; /* 48 */
+  }
+}
+
+@utility type-h5 {
+  font-family: var(--font-display);
+  font-weight: 700; /* TODO(figma): confirm H5 weight (card and step titles) */
+  font-size: 1.25rem; /* 20 */
+  line-height: 1.75rem; /* 28 */
+  @variant lg {
+    line-height: 2rem; /* 32 */
+  }
+}
+
+@utility type-subtitle-1 {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 1rem; /* 16 */
+  line-height: 1.625rem; /* 26 */
+  @variant lg {
+    font-size: 1.125rem; /* 18 */
+    line-height: 1.75rem; /* 28 */
+  }
+}
+
+@utility type-subtitle-2 {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 0.875rem; /* 14 */
+  line-height: 1.5rem; /* 24 */
+  @variant lg {
+    font-size: 1rem; /* 16 */
+    line-height: 1.75rem; /* 28 */
+  }
+}
+
+@utility type-quote {
+  font-family: var(--font-display);
+  font-weight: 700; /* TODO(figma): confirm quote font and weight */
+  font-size: 1.25rem; /* 20 */
+  line-height: 2rem; /* 32 */
+  @variant lg {
+    font-size: 1.875rem; /* 30 */
+    line-height: 2.75rem; /* 44 */
+  }
+}
+
+@utility type-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 0.875rem; /* 14 */
+  line-height: 1.5rem; /* 24 */
+}
+
+@utility type-overline {
+  font-family: var(--font-sans);
+  font-weight: 600; /* TODO(figma): confirm overline weight */
+  font-size: 0.75rem; /* 12 */
+  line-height: 1rem; /* 16 */
+  letter-spacing: 0.0625rem; /* TODO(figma): 1px estimated */
+  text-transform: uppercase;
+}
+
+/* Buttons and nav links share this label style */
+@utility type-label {
+  font-family: var(--font-sans);
+  font-weight: 600; /* TODO(figma): confirm button and nav link weight */
+  font-size: 0.875rem; /* 14 */
+  line-height: 1.25rem; /* 20 */
+}
+
+/* ---------------------------------------------------------------------------
+ * Base styles
+ * ------------------------------------------------------------------------- */
+@layer base {
+  html {
+    /* Keeps anchored section titles below the sticky header */
+    scroll-padding-top: var(--spacing-header);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    @apply bg-white font-sans text-navy antialiased;
+  }
+
+  /* One consistent, high-contrast focus ring for every interactive element */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue;
+  }
+}
