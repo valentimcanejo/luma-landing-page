@@ -10,13 +10,13 @@ export function Logo({ tone = "dark", className }: LogoProps) {
   return (
     <span
       className={cn(
-        // ~20px measured from the 42px-wide wordmark in the Figma export
+        // 20px renders the wordmark at ~53px wide, the Figma export measures 54px
         "font-display text-xl leading-none font-extrabold tracking-tight",
         tone === "dark" ? "text-navy" : "text-white",
         className,
       )}
     >
-      luma<span className="text-blue">.</span>
+      luma.
     </span>
   );
 }

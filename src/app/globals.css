@@ -12,6 +12,7 @@
   --color-white: #ffffff;
   --color-navy: #171b2c; /* text-primary, footer background */
   --color-blue: #3157f6;
+  --color-blue-dark: #2443d6; /* not in Figma: hover state for blue buttons */
   --color-yellow: #ffee7e;
   --color-yellow-soft: #fff1c2;
   --color-cream: #f9f8f3;
