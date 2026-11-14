@@ -1,4 +1,5 @@
 import { Header } from "@/components/layout/Header";
+import { Hero } from "@/components/sections/Hero";
 import { Section } from "@/components/ui/Section";
 
 // Temporary placeholders so the header anchors can be tested.
@@ -15,11 +16,7 @@ export default function Home() {
     <>
       <Header />
       <main id="main">
-        <Section id="hero" labelledBy="hero-title" tone="cream">
-          <h1 id="hero-title" className="type-h1">
-            Build skills that actually move you forward.
-          </h1>
-        </Section>
+        <Hero />
         {placeholders.map(({ id, title, tone }) => (
           <Section
             key={id}

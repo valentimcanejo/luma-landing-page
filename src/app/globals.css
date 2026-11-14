@@ -29,8 +29,9 @@
   --container-page: 80rem; /* 1280px */
   --spacing-header: 4.375rem; /* 70px, header height and anchor offset */
 
-  /* TODO(figma): provisional shadows, replace with the exact Figma effects */
-  --shadow-badge: 0 8px 24px -6px rgb(23 27 44 / 0.12);
+  /* Measured from the shadow raster in the Figma export: black, 10%, y 4, blur 24 */
+  --shadow-badge: 0 4px 24px rgb(0 0 0 / 0.1);
+  /* TODO(figma): provisional card shadow (contact form), replace with the Figma effect */
   --shadow-card: 0 16px 40px -12px rgb(23 27 44 / 0.12);
 }
 
