@@ -19,10 +19,18 @@ type SectionHeaderProps = {
   descriptionClassName?: string;
 };
 
-const titleStyles: Record<TitleStyle, string> = {
-  h1: "type-h1",
-  h2: "type-h2",
-  h3: "type-h3",
+/**
+ * Text style plus the gaps around the title, which change with the style in
+ * Figma (H1 in the hero: 12 / 24, H3 in Categories and How it works: 14 / 18).
+ */
+const titleStyles: Record<
+  TitleStyle,
+  { title: string; eyebrowGap: string; descriptionGap: string }
+> = {
+  h1: { title: "type-h1", eyebrowGap: "mt-3", descriptionGap: "mt-6" },
+  // TODO(figma): H2 gaps copied from H3, measure them in the final CTA step
+  h2: { title: "type-h2", eyebrowGap: "mt-3.5", descriptionGap: "mt-4.5" },
+  h3: { title: "type-h3", eyebrowGap: "mt-3.5", descriptionGap: "mt-4.5" },
 };
 
 export function SectionHeader({
@@ -38,6 +46,7 @@ export function SectionHeader({
   descriptionClassName,
 }: SectionHeaderProps) {
   const light = tone === "light";
+  const style = titleStyles[titleStyle];
 
   return (
     <div className={cn(align === "center" && "text-center", className)}>
@@ -49,9 +58,9 @@ export function SectionHeader({
       <Heading
         id={id}
         className={cn(
-          titleStyles[titleStyle],
+          style.title,
           light ? "text-white" : "text-navy",
-          eyebrow && "mt-3",
+          eyebrow && style.eyebrowGap,
         )}
       >
         {title}
@@ -59,7 +68,8 @@ export function SectionHeader({
       {description && (
         <p
           className={cn(
-            "mt-4 type-subtitle-1",
+            style.descriptionGap,
+            "type-subtitle-1",
             light ? "text-white" : "text-muted",
             descriptionClassName,
           )}

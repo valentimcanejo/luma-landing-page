@@ -36,7 +36,7 @@ export function Hero() {
             title="Build skills that actually move you forward."
             description="Practical courses taught by people who do the work every day. Learn design, technology, business and more — one focused lesson at a time."
             // 488px reproduces the Figma line breaks exactly
-            descriptionClassName="mt-6 max-w-[488px]"
+            descriptionClassName="max-w-[488px]"
           />
 
           {/* Full width and stacked on mobile, inline from 640px */}

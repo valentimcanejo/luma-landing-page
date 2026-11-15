@@ -30,12 +30,14 @@ _Draft, collected while building. Will be reorganized at the end._
 - Tailwind's default breakpoints. Figma has a 402px mobile frame and a 1280px desktop frame; there is no tablet frame, so tablet behavior is a decision: 40px side gutters from `md` (768px).
 - The header switches to the desktop nav at `lg` (1024px). Below that, the logo, four links and two buttons do not fit comfortably.
 - The hero uses two columns only from `xl` (1280px). Its 64px title needs about 560px next to the 500px image; at 1024px it would break into five lines, so between 1024 and 1279px the hero stays stacked.
+- The category cards use 1 column on mobile, 2 from `sm` (640px) and 4 only from `xl` (1280px). At 1024px four cards would be about 200px wide and the descriptions would wrap into five lines.
 - On mobile the hero image appears before the text, as in Figma, but the text stays first in the DOM so the `h1` is the first thing read. The image block has nothing focusable, so focus order is unaffected.
 
 ### Navigation
 
 - The header is sticky. `scroll-padding-top` on `html` keeps anchored sections below it, in one place instead of on every section.
 - "For Teams" and "About" have no matching sections, so they link to Contact and How it works. "Log in" links to Contact (there is no authentication in scope) and "Start learning" to the categories.
+- There are no course pages in scope, so the "Explore" links on the category cards lead to the featured course section. Each link has visually hidden text ("Explore Product Design courses") so its name makes sense out of context, for example in a screen reader's list of links.
 - The mobile menu follows the disclosure pattern (button with `aria-expanded` and a panel below the header), not a modal dialog, so it needs no focus trap. It closes on Escape (returning focus to the toggle), outside click, link click, focus leaving the menu and when resizing to desktop.
 
 ### Design deviations
