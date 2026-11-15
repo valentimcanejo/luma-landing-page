@@ -41,6 +41,8 @@ _Draft, collected while building. Will be reorganized at the end._
 - "For Teams" and "About" have no matching sections, so they link to Contact and How it works. "Log in" links to Contact (there is no authentication in scope) and "Start learning" to the categories.
 - There are no course pages in scope, so the "Explore" links on the category cards lead to the featured course section. Each link has visually hidden text ("Explore Product Design courses") so its name makes sense out of context, for example in a screen reader's list of links.
 - The testimonial section has no visible title in the design, so it gets a visually hidden `h2` ("What learners say") to keep the heading outline complete. The quote uses `figure`, `blockquote` and `figcaption`; the author photo has an empty `alt` because the name is right next to it.
+- The community mosaic is one accessible image (`role="img"` with a label) whose ten photos have empty `alt`, instead of ten alt texts that would add little. The photo files include their drop shadow, so they are positioned in percentages of the 500px lilac circle and the composition scales as a whole. On mobile this is the desktop composition at 330px; the Figma mobile frame arranges the tiles slightly differently.
+- "Explore teachers and students" leads to the contact form (no community page in scope).
 - In the featured course, "View course" leads to the contact form (no course page in scope) and "Browse all courses" to the categories.
 - The mobile menu follows the disclosure pattern (button with `aria-expanded` and a panel below the header), not a modal dialog, so it needs no focus trap. It closes on Escape (returning focus to the toggle), outside click, link click, focus leaving the menu and when resizing to desktop.
 
@@ -55,6 +57,7 @@ _Draft, collected while building. Will be reorganized at the end._
 ## Known issues
 
 - On mobile, Figma crops the hero photo to 346x380px, while the exported image (with its rounded corners baked in) has the desktop ratio of 500x520. Cropping it with `object-cover` would cut those corners, so the image keeps its natural ratio and renders at 346x360px, 20px shorter than in Figma.
+- Buttons are 52px tall everywhere. Figma uses 54px in the hero and community sections and 52px in the featured course, so one size was kept for consistency.
 - `npm audit` reports 7 moderate vulnerabilities, all in the `typescript-eslint` packages pulled in by `eslint-config-next`. They are development-only dependencies used for linting and are not part of the production bundle. `npm audit fix --force` would downgrade `eslint-config-next`, so they are left as is until upstream releases a fix.
 
 ## Time spent

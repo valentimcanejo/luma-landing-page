@@ -16,6 +16,8 @@ type SectionHeaderProps = {
   /** light: white text on the blue section */
   tone?: "dark" | "light";
   className?: string;
+  /** Overrides, for sections whose spacing differs from the shared style */
+  titleClassName?: string;
   descriptionClassName?: string;
 };
 
@@ -43,6 +45,7 @@ export function SectionHeader({
   align = "left",
   tone = "dark",
   className,
+  titleClassName,
   descriptionClassName,
 }: SectionHeaderProps) {
   const light = tone === "light";
@@ -61,6 +64,7 @@ export function SectionHeader({
           style.title,
           light ? "text-white" : "text-navy",
           eyebrow && style.eyebrowGap,
+          titleClassName,
         )}
       >
         {title}

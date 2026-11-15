@@ -21,4 +21,10 @@ export type Stat = { value: string; label: string };
 
 export type FooterColumn = { title: string; links: NavLink[] };
 
-export type CommunityPhoto = { id: string; src: StaticImageData };
+/** Position in the 500x500 mosaic (the lilac circle), in Figma px */
+export type CommunityPhoto = {
+  id: string;
+  src: StaticImageData;
+  x: number;
+  y: number;
+};
