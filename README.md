@@ -40,6 +40,7 @@ _Draft, collected while building. Will be reorganized at the end._
 - The header is sticky. `scroll-padding-top` on `html` keeps anchored sections below it, in one place instead of on every section.
 - "For Teams" and "About" have no matching sections, so they link to Contact and How it works. "Log in" links to Contact (there is no authentication in scope) and "Start learning" to the categories.
 - There are no course pages in scope, so the "Explore" links on the category cards lead to the featured course section. Each link has visually hidden text ("Explore Product Design courses") so its name makes sense out of context, for example in a screen reader's list of links.
+- The testimonial section has no visible title in the design, so it gets a visually hidden `h2` ("What learners say") to keep the heading outline complete. The quote uses `figure`, `blockquote` and `figcaption`; the author photo has an empty `alt` because the name is right next to it.
 - In the featured course, "View course" leads to the contact form (no course page in scope) and "Browse all courses" to the categories.
 - The mobile menu follows the disclosure pattern (button with `aria-expanded` and a panel below the header), not a modal dialog, so it needs no focus trap. It closes on Escape (returning focus to the toggle), outside click, link click, focus leaving the menu and when resizing to desktop.
 

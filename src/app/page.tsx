@@ -3,6 +3,7 @@ import { Categories } from "@/components/sections/Categories";
 import { FeaturedCourse } from "@/components/sections/FeaturedCourse";
 import { Hero } from "@/components/sections/Hero";
 import { HowItWorks } from "@/components/sections/HowItWorks";
+import { Testimonial } from "@/components/sections/Testimonial";
 import { Section } from "@/components/ui/Section";
 
 // Temporary placeholders so the header and in-page anchors can be tested.
@@ -21,6 +22,7 @@ export default function Home() {
         <Categories />
         <FeaturedCourse />
         <HowItWorks />
+        <Testimonial />
         {placeholders.map(({ id, title, tone }) => (
           <Section
             key={id}

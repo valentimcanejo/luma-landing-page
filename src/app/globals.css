@@ -130,7 +130,7 @@
 
 @utility type-quote {
   font-family: var(--font-display);
-  font-weight: 700; /* TODO(figma): confirm quote font and weight */
+  font-weight: 500; /* TODO(figma): confirm quote weight, 500 estimated from the render (font is Plus Jakarta Sans) */
   font-size: 1.25rem; /* 20 */
   line-height: 2rem; /* 32 */
   @variant lg {
