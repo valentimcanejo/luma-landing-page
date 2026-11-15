@@ -31,6 +31,7 @@ _Draft, collected while building. Will be reorganized at the end._
 - The header switches to the desktop nav at `lg` (1024px). Below that, the logo, four links and two buttons do not fit comfortably.
 - The hero uses two columns only from `xl` (1280px). Its 64px title needs about 560px next to the 500px image; at 1024px it would break into five lines, so between 1024 and 1279px the hero stays stacked.
 - The category cards use 1 column on mobile, 2 from `sm` (640px) and 4 only from `xl` (1280px). At 1024px four cards would be about 200px wide and the descriptions would wrap into five lines.
+- The featured course uses two columns from `lg` (1024px), keeping the Figma proportions (538 / 522). Stacked, the image would be about 860px wide at that size.
 - On mobile the hero image appears before the text, as in Figma, but the text stays first in the DOM so the `h1` is the first thing read. The image block has nothing focusable, so focus order is unaffected.
 
 ### Navigation
@@ -38,11 +39,13 @@ _Draft, collected while building. Will be reorganized at the end._
 - The header is sticky. `scroll-padding-top` on `html` keeps anchored sections below it, in one place instead of on every section.
 - "For Teams" and "About" have no matching sections, so they link to Contact and How it works. "Log in" links to Contact (there is no authentication in scope) and "Start learning" to the categories.
 - There are no course pages in scope, so the "Explore" links on the category cards lead to the featured course section. Each link has visually hidden text ("Explore Product Design courses") so its name makes sense out of context, for example in a screen reader's list of links.
+- In the featured course, "View course" leads to the contact form (no course page in scope) and "Browse all courses" to the categories.
 - The mobile menu follows the disclosure pattern (button with `aria-expanded` and a panel below the header), not a modal dialog, so it needs no focus trap. It closes on Escape (returning focus to the toggle), outside click, link click, focus leaving the menu and when resizing to desktop.
 
 ### Design deviations
 
 - Hover states are not in the design: blue buttons darken to a new `blue-dark` token, yellow buttons turn `gold`, outline buttons get a navy border, links go from `muted` to `navy`.
+- Contrast fixes (WCAG AA, 4.5:1 for normal text): on the blue section, "Browse all courses" and the mobile course detail chips use white instead of `#E7E7EC` (4.4:1).
 - The global focus ring is blue, which would disappear on the blue section, so that section switches it to white through a `--focus-ring` CSS variable.
 - The avatar image files include their ring, so they are displayed at the ring's outer size from Figma (36px hero, 44px CTA) to keep the same spacing and 12px overlap.
 
