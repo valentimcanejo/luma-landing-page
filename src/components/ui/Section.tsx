@@ -15,7 +15,8 @@ type SectionProps = {
 const toneClasses: Record<SectionTone, string> = {
   cream: "bg-cream",
   white: "bg-white",
-  blue: "bg-blue text-white",
+  // The default blue focus ring would disappear on this background
+  blue: "bg-blue text-white [--focus-ring:var(--color-white)]",
   "yellow-soft": "bg-yellow-soft",
 };
 

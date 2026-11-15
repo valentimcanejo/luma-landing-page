@@ -43,6 +43,7 @@ _Draft, collected while building. Will be reorganized at the end._
 ### Design deviations
 
 - Hover states are not in the design: blue buttons darken to a new `blue-dark` token, yellow buttons turn `gold`, outline buttons get a navy border, links go from `muted` to `navy`.
+- The global focus ring is blue, which would disappear on the blue section, so that section switches it to white through a `--focus-ring` CSS variable.
 - The avatar image files include their ring, so they are displayed at the ring's outer size from Figma (36px hero, 44px CTA) to keep the same spacing and 12px overlap.
 
 ## Known issues

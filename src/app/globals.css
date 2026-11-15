@@ -182,8 +182,10 @@
     @apply bg-white font-sans text-navy antialiased;
   }
 
-  /* One consistent, high-contrast focus ring for every interactive element */
+  /* One consistent, high-contrast focus ring for every interactive element.
+     Sections with a blue background set --focus-ring to white. */
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-blue;
+    @apply outline-2 outline-offset-2;
+    outline-color: var(--focus-ring, var(--color-blue));
   }
 }
