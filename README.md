@@ -48,6 +48,7 @@ _Draft, collected while building. Will be reorganized at the end._
   - Errors appear on submit, then each field is re-validated while typing so its message disappears as soon as it is fixed. On a failed submit, focus moves to the first invalid field.
   - A valid submit resets the form and shows a confirmation in a `role="status"` region that is always in the DOM, so screen readers announce it.
   - No libraries (React Hook Form, Zod): three fields do not justify them.
+- Final CTA: the decorative peach shapes (desktop only in Figma) were exported from the Figma vectors into one SVG (`src/assets/images/cta-shapes.svg`, about 16 KB, with redundant outline paths removed). It is a single `<img alt="">` at its design size (1280 x 470), centered and clipped by the section, so wider screens show more background and narrower desktops crop the outer shapes, without ever overlapping the content. "Join Luma" leads to the contact form (no sign-up flow in scope).
 - In the featured course, "View course" leads to the contact form (no course page in scope) and "Browse all courses" to the categories.
 - The mobile menu follows the disclosure pattern (button with `aria-expanded` and a panel below the header), not a modal dialog, so it needs no focus trap. It closes on Escape (returning focus to the toggle), outside click, link click, focus leaving the menu and when resizing to desktop.
 

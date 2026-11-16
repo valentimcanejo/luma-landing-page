@@ -30,8 +30,9 @@ const titleStyles: Record<
   { title: string; eyebrowGap: string; descriptionGap: string }
 > = {
   h1: { title: "type-h1", eyebrowGap: "mt-3", descriptionGap: "mt-6" },
-  // TODO(figma): H2 gaps copied from H3, measure them in the final CTA step
-  h2: { title: "type-h2", eyebrowGap: "mt-3.5", descriptionGap: "mt-4.5" },
+  // Description gap measured in the final CTA (17px, rounded to the 4px grid).
+  // No H2 title has an overline in Figma, so the eyebrow gap follows H3.
+  h2: { title: "type-h2", eyebrowGap: "mt-3.5", descriptionGap: "mt-4" },
   h3: { title: "type-h3", eyebrowGap: "mt-3.5", descriptionGap: "mt-4.5" },
 };
 
