@@ -25,14 +25,16 @@
   --color-faint: #9e9faa;
   --color-line: #dbdfeb;
   --color-line-soft: #e7e7ec;
+  /* Not in Figma (no error state designed): form errors, 5.9:1 on white */
+  --color-danger: #c0352b;
 
   --container-page: 80rem; /* 1280px */
   --spacing-header: 4.375rem; /* 70px, header height and anchor offset */
 
   /* Measured from the shadow raster in the Figma export: black, 10%, y 4, blur 24 */
   --shadow-badge: 0 4px 24px rgb(0 0 0 / 0.1);
-  /* TODO(figma): provisional card shadow (contact form), replace with the Figma effect */
-  --shadow-card: 0 16px 40px -12px rgb(23 27 44 / 0.12);
+  /* Measured from the contact card shadow raster: black, ~4%, y 12, blur 32 */
+  --shadow-card: 0 12px 32px rgb(0 0 0 / 0.04);
 }
 
 /* inline: resolve the next/font CSS variables where the utility is used */

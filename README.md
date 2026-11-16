@@ -43,6 +43,11 @@ _Draft, collected while building. Will be reorganized at the end._
 - The testimonial section has no visible title in the design, so it gets a visually hidden `h2` ("What learners say") to keep the heading outline complete. The quote uses `figure`, `blockquote` and `figcaption`; the author photo has an empty `alt` because the name is right next to it.
 - The community mosaic is one accessible image (`role="img"` with a label) whose ten photos have empty `alt`, instead of ten alt texts that would add little. The photo files include their drop shadow, so they are positioned in percentages of the 500px lilac circle and the composition scales as a whole. On mobile this is the desktop composition at 330px; the Figma mobile frame arranges the tiles slightly differently.
 - "Explore teachers and students" leads to the contact form (no community page in scope).
+- Contact form, client side only (no backend in scope): validation lives in a pure function, `src/lib/validateContact.ts`, with no React or DOM, so it can be unit tested on its own. Only the form is a client component; the rest of the section is rendered on the server.
+  - `noValidate` replaces the browser bubbles (inconsistent and not stylable) with inline messages linked through `aria-describedby` and `aria-invalid`. Fields keep `required`, so assistive technology still announces them as required.
+  - Errors appear on submit, then each field is re-validated while typing so its message disappears as soon as it is fixed. On a failed submit, focus moves to the first invalid field.
+  - A valid submit resets the form and shows a confirmation in a `role="status"` region that is always in the DOM, so screen readers announce it.
+  - No libraries (React Hook Form, Zod): three fields do not justify them.
 - In the featured course, "View course" leads to the contact form (no course page in scope) and "Browse all courses" to the categories.
 - The mobile menu follows the disclosure pattern (button with `aria-expanded` and a panel below the header), not a modal dialog, so it needs no focus trap. It closes on Escape (returning focus to the toggle), outside click, link click, focus leaving the menu and when resizing to desktop.
 
@@ -51,6 +56,7 @@ _Draft, collected while building. Will be reorganized at the end._
 - Hover states are not in the design: blue buttons darken to a new `blue-dark` token, yellow buttons turn `gold`, outline buttons get a navy border, links go from `muted` to `navy`.
 - Contrast fixes (WCAG AA, 4.5:1 for normal text): on the blue section, "Browse all courses" and the mobile course detail chips use white instead of `#E7E7EC` (4.4:1); the "Step 0X" labels on cream use `#656770` instead of `#6D7384` (4.47:1).
 - Figma inconsistencies, following the user's decisions: steps are numbered 01, 02, 03 (desktop shows "Step 01" three times), the page is in English, and the desktop copy wins when texts differ. The step 2 icon uses the desktop solid peach (mobile shows coral at 15% opacity).
+- Form details not in the design: a `danger` color for errors (`#C0352B`, 5.9:1 on white; the Figma coral is about 2.8:1), placeholders in `muted` instead of `#6D7384` (4.47:1 on the cream fields), and 16px input text below 640px, because iOS Safari zooms into inputs with smaller text. The contact description stays at the shared 16px on mobile (Figma uses 14px only in this section).
 - The global focus ring is blue, which would disappear on the blue section, so that section switches it to white through a `--focus-ring` CSS variable.
 - The avatar image files include their ring, so they are displayed at the ring's outer size from Figma (36px hero, 44px CTA) to keep the same spacing and 12px overlap.
 
