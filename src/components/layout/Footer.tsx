@@ -9,7 +9,8 @@ import { footerColumns } from "@/data/footer";
  */
 export function Footer() {
   return (
-    <footer className="bg-navy pt-15 pb-5 lg:pt-20 lg:pb-10">
+    // White focus ring: the default blue is only 3.1:1 on navy
+    <footer className="bg-navy pt-15 pb-5 [--focus-ring:var(--color-white)] lg:pt-20 lg:pb-10">
       <Container>
         {/* Mobile: brand on top, link columns in a 2-column grid.
             Desktop: brand plus three 192px columns, 48px apart (Figma). */}

@@ -48,9 +48,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${inter.variable} ${jakarta.variable}`}>
       <body>
+        {/* Padding goes on focus: too, because not-sr-only resets it to 0 */}
         <a
           href="#main"
-          className="sr-only rounded-lg bg-navy px-4 py-3 type-label text-white focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50"
+          className="sr-only rounded-lg bg-navy type-label text-white focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-3"
         >
           Skip to content
         </a>
