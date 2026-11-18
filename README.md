@@ -4,7 +4,7 @@ Responsive landing page for Luma, a learning platform, built from a Figma design
 
 ## Getting started
 
-Requirements: Node.js 20.9 or later and npm.
+Requirements: Node.js 22.12 or later and npm (Next.js alone runs on 20.9, Vitest 5 needs 22.12).
 
 ```bash
 npm install
@@ -20,6 +20,8 @@ npm run dev      # http://localhost:3000
 | `npm run typecheck`    | Generates Next.js route types, then runs `tsc` |
 | `npm run format`       | Formats the code with Prettier                 |
 | `npm run format:check` | Checks formatting without writing              |
+| `npm test`             | Runs the tests once (Vitest)                   |
+| `npm run test:watch`   | Runs the tests in watch mode                   |
 
 ## Decisions
 
@@ -63,11 +65,17 @@ _Draft, collected while building. Will be reorganized at the end._
 - Accessibility pass on the full page (manual, in the browser): one `h1` and no skipped heading levels, every section labelled by its title, no broken `aria-*` references or duplicate ids, every image with an `alt` (empty when decorative), every field with a label, all text at or above WCAG AA contrast (the closest is the Figma blue on lilac at 4.5:1), keyboard order following the visual order, smooth scrolling only without `prefers-reduced-motion`, and no horizontal scroll at 320px. It found one bug: the skip link had no padding when focused, because Tailwind's `not-sr-only` resets it.
 - The avatar image files include their ring, so they are displayed at the ring's outer size from Figma (36px hero, 44px CTA) to keep the same spacing and 12px overlap.
 
+### Tests
+
+- Vitest + Testing Library cover the contact form, the only part of the page with logic. `validateContact` is a pure function, tested directly (empty and whitespace-only values, invalid emails, minimum message length). The `ContactForm` tests go through the UI like a user would (`user-event`, queries by label and role): focus moves to the first invalid field, errors are linked with `aria-describedby`, an error clears as soon as the field is fixed, and a valid submit announces the confirmation and resets the form.
+- The tests were checked by breaking the component on purpose (removing the focus call and the `aria-describedby` link): the related tests failed as expected.
+- No `vite-tsconfig-paths` plugin: Vite 8 resolves the `@/*` alias from `tsconfig.json` with `resolve.tsconfigPaths`.
+
 ## Known issues
 
 - On mobile, Figma crops the hero photo to 346x380px, while the exported image (with its rounded corners baked in) has the desktop ratio of 500x520. Cropping it with `object-cover` would cut those corners, so the image keeps its natural ratio and renders at 346x360px, 20px shorter than in Figma.
 - Buttons are 52px tall everywhere. Figma uses 54px in the hero and community sections and 52px in the featured course, so one size was kept for consistency.
-- `npm audit` reports 7 moderate vulnerabilities, all in the `typescript-eslint` packages pulled in by `eslint-config-next`. They are development-only dependencies used for linting and are not part of the production bundle. `npm audit fix --force` would downgrade `eslint-config-next`, so they are left as is until upstream releases a fix.
+- `npm audit` reports 18 vulnerabilities (6 moderate, 12 high), all in development-only tooling that is not part of the production bundle: `typescript-eslint` (pulled in by `eslint-config-next`), and a ReDoS advisory in `picomatch`, the glob matcher used by ESLint, Vite and Vitest, which has no patched version yet. These tools only match glob patterns from this repo's own config, never user input. `npm audit fix --force` would downgrade `eslint-config-next`, so they are left as is until upstream releases a fix.
 
 ## Time spent
 
