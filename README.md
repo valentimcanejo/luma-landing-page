@@ -77,12 +77,13 @@ Lighthouse 13.6 on the production build (`next build && next start`), headless C
 
 | Preset  | Performance | Accessibility | Best Practices | SEO | LCP   | TBT   | CLS |
 | ------- | ----------- | ------------- | -------------- | --- | ----- | ----- | --- |
-| Mobile  | 95          | 100           | 96             | 100 | 2.9 s | 40 ms | 0   |
-| Desktop | 100         | 100           | 96             | 100 | 0.7 s | 0 ms  | 0   |
+| Mobile  | 95-96       | 100           | 100            | 100 | 2.9 s | 40 ms | 0   |
+| Desktop | 100         | 100           | 100            | 100 | 0.7 s | 0 ms  | 0   |
 
 - The mobile LCP (the hero photo) is 2.9 s in Lighthouse's simulated slow 4G, but 1.85 s with real throttling (`--throttling-method=devtools`), where it paints together with the first paint. The critical path is the HTML, the CSS (7 KB) and the two variable fonts (75 KB); the JavaScript (about 150 KB, almost all React and Next.js runtime) only arrives after the LCP. The simulation still counts it because, on localhost, the scripts finish before the photo paints.
 - The hero image uses `loading="eager"` and `fetchPriority="high"` instead of `preload`, as the Next.js 16 docs recommend for an LCP image. The score did not change, but the preload link now carries `fetchpriority="high"`.
 - The community photos had a fixed `sizes="150px"`, so the browser downloaded 256px files for photos shown at 111px. Each photo now gets its real rendered width (desktop and mobile), which cut the desktop page weight from 477 KB to 393 KB.
+- Best Practices was 96 only because `/favicon.ico` returned 404. Figma has no favicon, so `src/app/icon.svg` is a "l." monogram taken from the footer wordmark (white on navy), drawn with shapes instead of text because an SVG favicon cannot load the page fonts.
 - Not changed: "unused" and "legacy" JavaScript (27 KB and 14 KB) are inside the Next.js runtime chunk, and the render-blocking CSS is the 7 KB Tailwind stylesheet, which is cheaper to keep as one cached file than to inline.
 
 ## Known issues
