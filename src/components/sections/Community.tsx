@@ -6,7 +6,20 @@ import { communityPhotos } from "@/data/community";
 
 /** Size of the mosaic in Figma (the lilac circle); positions are relative to it */
 const MOSAIC_SIZE = 500;
+/** The mosaic is capped at 330px below the sm breakpoint (Figma mobile) */
+const MOSAIC_SIZE_MOBILE = 330;
 const toPercent = (value: number) => `${(value / MOSAIC_SIZE) * 100}%`;
+
+/**
+ * Each photo is displayed at half its pixel width inside the 500px mosaic,
+ * scaled down with it on mobile. An exact `sizes` lets the browser pick the
+ * smallest file from the srcset (a fixed 150px over-fetched most photos).
+ */
+function photoSizes(pixelWidth: number) {
+  const desktop = pixelWidth / 2;
+  const mobile = Math.ceil((desktop * MOSAIC_SIZE_MOBILE) / MOSAIC_SIZE);
+  return `(min-width: 640px) ${desktop}px, ${mobile}px`;
+}
 
 export function Community() {
   return (
@@ -50,7 +63,7 @@ export function Community() {
               key={photo.id}
               src={photo.src}
               alt=""
-              sizes="150px"
+              sizes={photoSizes(photo.src.width)}
               className="absolute h-auto"
               style={{
                 left: toPercent(photo.x),

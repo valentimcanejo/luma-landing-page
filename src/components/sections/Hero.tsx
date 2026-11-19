@@ -80,7 +80,10 @@ export function Hero() {
             <Image
               src={heroImage}
               alt="Smiling woman with glasses taking an online lesson on her laptop, with a notebook on the desk"
-              preload
+              // LCP image. The Next 16 docs prefer this over `preload`; React
+              // still adds a <link rel="preload"> to the head, now with high priority.
+              loading="eager"
+              fetchPriority="high"
               placeholder="blur"
               // 8px inset inside the 20px gutter on mobile, capped at 500px
               sizes="(min-width: 556px) 500px, calc(100vw - 56px)"

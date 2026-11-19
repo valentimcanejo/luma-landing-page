@@ -71,6 +71,20 @@ _Draft, collected while building. Will be reorganized at the end._
 - The tests were checked by breaking the component on purpose (removing the focus call and the `aria-describedby` link): the related tests failed as expected.
 - No `vite-tsconfig-paths` plugin: Vite 8 resolves the `@/*` alias from `tsconfig.json` with `resolve.tsconfigPaths`.
 
+### Performance
+
+Lighthouse 13.6 on the production build (`next build && next start`), headless Chrome:
+
+| Preset  | Performance | Accessibility | Best Practices | SEO | LCP   | TBT   | CLS |
+| ------- | ----------- | ------------- | -------------- | --- | ----- | ----- | --- |
+| Mobile  | 95          | 100           | 96             | 100 | 2.9 s | 40 ms | 0   |
+| Desktop | 100         | 100           | 96             | 100 | 0.7 s | 0 ms  | 0   |
+
+- The mobile LCP (the hero photo) is 2.9 s in Lighthouse's simulated slow 4G, but 1.85 s with real throttling (`--throttling-method=devtools`), where it paints together with the first paint. The critical path is the HTML, the CSS (7 KB) and the two variable fonts (75 KB); the JavaScript (about 150 KB, almost all React and Next.js runtime) only arrives after the LCP. The simulation still counts it because, on localhost, the scripts finish before the photo paints.
+- The hero image uses `loading="eager"` and `fetchPriority="high"` instead of `preload`, as the Next.js 16 docs recommend for an LCP image. The score did not change, but the preload link now carries `fetchpriority="high"`.
+- The community photos had a fixed `sizes="150px"`, so the browser downloaded 256px files for photos shown at 111px. Each photo now gets its real rendered width (desktop and mobile), which cut the desktop page weight from 477 KB to 393 KB.
+- Not changed: "unused" and "legacy" JavaScript (27 KB and 14 KB) are inside the Next.js runtime chunk, and the render-blocking CSS is the 7 KB Tailwind stylesheet, which is cheaper to keep as one cached file than to inline.
+
 ## Known issues
 
 - On mobile, Figma crops the hero photo to 346x380px, while the exported image (with its rounded corners baked in) has the desktop ratio of 500x520. Cropping it with `object-cover` would cut those corners, so the image keeps its natural ratio and renders at 346x360px, 20px shorter than in Figma.
