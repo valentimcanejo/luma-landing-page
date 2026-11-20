@@ -4,6 +4,8 @@ Responsive landing page for Luma, a learning platform, built from a Figma design
 
 The page has ten sections: header with mobile menu, hero, categories, featured course, how it works, testimonial and stats, community, contact form, final call to action and footer. It follows the 402px mobile and 1280px desktop Figma frames and is usable from 320px upwards.
 
+**Live demo:** https://luma-landing-page-gamma.vercel.app/
+
 ## Getting started
 
 Requirements: Node.js 22.12 or later and npm (Next.js alone runs on 20.9, Vitest 5 needs 22.12).
@@ -131,14 +133,16 @@ npm test
 
 ## Performance
 
-Lighthouse 13.6 on the production build (`next build && next start`), headless Chrome:
+Lighthouse 13.6, headless Chrome, on the Vercel deployment and on the local production build (`next build && next start`). Mobile performance is the range of three runs:
 
-| Preset  | Performance | Accessibility | Best Practices | SEO | LCP   | TBT   | CLS |
-| ------- | ----------- | ------------- | -------------- | --- | ----- | ----- | --- |
-| Mobile  | 95-96       | 100           | 100            | 100 | 2.9 s | 40 ms | 0   |
-| Desktop | 100         | 100           | 100            | 100 | 0.7 s | 0 ms  | 0   |
+| Target | Preset  | Performance | Accessibility | Best Practices | SEO | LCP       | TBT       | CLS |
+| ------ | ------- | ----------- | ------------- | -------------- | --- | --------- | --------- | --- |
+| Vercel | Mobile  | 98          | 100           | 100            | 100 | 2.2-2.3 s | 80-120 ms | 0   |
+| Vercel | Desktop | 100         | 100           | 100            | 100 | 0.5 s     | 0 ms      | 0   |
+| Local  | Mobile  | 95-96       | 100           | 100            | 100 | 2.9 s     | 40 ms     | 0   |
+| Local  | Desktop | 100         | 100           | 100            | 100 | 0.7 s     | 0 ms      | 0   |
 
-- The mobile LCP (the hero photo) is 2.9 s in Lighthouse's simulated slow 4G, but 1.85 s with real throttling (`--throttling-method=devtools`), where it paints together with the first paint. The critical path is the HTML, the CSS (7 KB) and the two variable fonts (75 KB); the JavaScript (about 150 KB, almost all React and Next.js runtime) only arrives after the LCP. The simulation still counts it because, on localhost, the scripts finish before the photo paints.
+- Locally, the mobile LCP (the hero photo) is 2.9 s in Lighthouse's simulated slow 4G, but 1.85 s with real throttling (`--throttling-method=devtools`), where it paints together with the first paint. The critical path is the HTML, the CSS (7 KB) and the two variable fonts (75 KB); the JavaScript (about 150 KB, almost all React and Next.js runtime) only arrives after the LCP. The simulation still counts it because, on localhost, the scripts finish before the photo paints.
 - The hero image uses `loading="eager"` and `fetchPriority="high"` instead of `preload`, as the Next.js 16 docs recommend for an LCP image. The score did not change, but the preload link now carries `fetchpriority="high"`.
 - The community photos had a fixed `sizes="150px"`, so the browser downloaded 256px files for photos shown at 111px. Each photo now gets its real rendered width (desktop and mobile), which cut the desktop page weight from 477 KB to 393 KB.
 - Best Practices was 96 only because `/favicon.ico` returned 404. Figma has no favicon, so `src/app/icon.svg` is a "l." monogram taken from the footer wordmark (white on navy), drawn with shapes instead of text because an SVG favicon cannot load the page fonts.
