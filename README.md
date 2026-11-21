@@ -4,7 +4,9 @@ Responsive landing page for Luma, a learning platform, built from a Figma design
 
 The page has ten sections: header with mobile menu, hero, categories, featured course, how it works, testimonial and stats, community, contact form, final call to action and footer. It follows the 402px mobile and 1280px desktop Figma frames and is usable from 320px upwards.
 
-**Live demo:** https://luma-landing-page-gamma.vercel.app/
+**Live demo:** https://luma-landing-page-buzz.vercel.app/
+
+**Video demo:** https://www.loom.com/share/61047bf1e47b47239e1aec0a631446c7
 
 ## Getting started
 
